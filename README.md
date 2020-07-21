@@ -22,6 +22,7 @@ A modern speed dial for Firefox and Chrome, inspired by Opera
 - Added cursor:pointer to few places
 - Moved clock to the bottom
 - Added opacity to each tile to give a hover effect
+- Few other stuffs I don't remember
 
 ### building for chrome vs firefox
 
