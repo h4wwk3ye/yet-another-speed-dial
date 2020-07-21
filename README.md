@@ -17,7 +17,7 @@ A modern speed dial for Firefox and Chrome, inspired by Opera
 
 ### Changes done by me
 - Added padding to tiles so that images don't get cut out.
-- Changed every modal background from white to black. Looks better tbh
+- Changed every modal background from black to white. Looks better tbh
 - Removed center flex alignments of tile
 - Added cursor:pointer to few places
 - Moved clock to the bottom
