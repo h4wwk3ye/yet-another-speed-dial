@@ -28,6 +28,9 @@ A modern speed dial for Firefox and Chrome, inspired by Opera
 - Added opacity to each tile to give a hover effect
 - Few other stuffs I don't remember
 
+![five cells](https://github.com/h4wwk3ye/yet-another-speed-dial/blob/master/assets/fiveCells.png?raw=true)
+![four cells](https://github.com/h4wwk3ye/yet-another-speed-dial/blob/master/assets/fourCells.png?raw=true)
+
 ### building for chrome vs firefox
 
 chrome: remove `chrome_settings_overrides` and `browser_specific_settings` manifest keys  
