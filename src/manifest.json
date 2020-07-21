@@ -25,14 +25,8 @@
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "chrome_settings_overrides": {
-    "homepage": "index.html"
-  },
   "background": {
-    "scripts": [
-      "js/lib/browser-polyfill.min.js",
-      "js/background.js"
-    ]
+    "scripts": ["js/lib/browser-polyfill.min.js", "js/background.js"]
   },
   "browser_action": {
     "default_icon": {
@@ -40,26 +34,23 @@
       "24": "icons/action-icon24.png",
       "32": "icons/action-icon32.png"
     },
-    "theme_icons": [{
-      "light": "icons/action-icon16-light.png",
-      "dark": "icons/action-icon16.png",
-      "size": 16
-    }, {
-      "light": "icons/action-icon24-light.png",
-      "dark": "icons/action-icon24.png",
-      "size": 24
-    },
+    "theme_icons": [
+      {
+        "light": "icons/action-icon16-light.png",
+        "dark": "icons/action-icon16.png",
+        "size": 16
+      },
+      {
+        "light": "icons/action-icon24-light.png",
+        "dark": "icons/action-icon24.png",
+        "size": 24
+      },
       {
         "light": "icons/action-icon32-light.png",
         "dark": "icons/action-icon32.png",
         "size": 32
-      }],
+      }
+    ],
     "default_title": "Add to Speed Dial"
-  },
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "yet_another_speed_dial@conceptualspace.net",
-      "strict_min_version": "59.0"
-    }
   }
 }
