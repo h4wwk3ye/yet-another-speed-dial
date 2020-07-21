@@ -106,196 +106,196 @@ function convertUrlToAbsolute(origin, path) {
 }
 
 function getThumbnails(url) {
-  // return new Promise(function (resolve, reject) {
-  //   getOgImage(url)
-  //     .then(result => saveThumbnails(url, result))
-  //     .then(() => getScreenshot(url))
-  //     .then(result => resizeThumb(result))
-  //     .then(result => saveThumbnails(url, result))
-  //     .then(() => getLogo(url))
-  //     .then(result => saveThumbnails(url, result))
-  //     .then(() => resolve())
-  //     .catch(error => console.log(error));
-  // });
+  return new Promise(function (resolve, reject) {
+    getOgImage(url)
+      .then(result => saveThumbnails(url, result))
+      .then(() => getScreenshot(url))
+      .then(result => resizeThumb(result))
+      .then(result => saveThumbnails(url, result))
+      .then(() => getLogo(url))
+      .then(result => saveThumbnails(url, result))
+      .then(() => resolve())
+      .catch(error => console.log(error));
+  });
 }
 
 function getOgImage(url) {
-  // return new Promise(function (resolve, reject) {
-  //   // tracking protection hack. use local resource instead
-  //   let whitelist = [
-  //     'mail.google.com',
-  //     'gmail.com',
-  //     'www.facebook.com',
-  //     'www.reddit.com',
-  //     'twitter.com',
-  //   ];
-  //   let hostname = new URL(url).hostname;
-  //   if (whitelist.includes(hostname)) {
-  //     resolve(['img/' + hostname + '.png']);
-  //     return;
-  //   }
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.onerror = function (e) {
-  //     console.log(e);
-  //     resolve();
-  //   };
-  //   xhr.onload = function () {
-  //     let images = [];
-  //     // get open graph images
-  //     let metas = xhr.responseXML.getElementsByTagName('meta');
-  //     for (let meta of metas) {
-  //       if (
-  //         meta.getAttribute('property') === 'og:image' &&
-  //         meta.getAttribute('content')
-  //       ) {
-  //         let imageUrl = convertUrlToAbsolute(
-  //           url,
-  //           meta.getAttribute('content')
-  //         );
-  //         images.push(imageUrl);
-  //       }
-  //     }
-  //     // get large icons
-  //     let sizes = ['192x192', '180x180', '144x144', '96x96'];
-  //     for (let size of sizes) {
-  //       let icon = xhr.responseXML.querySelector(
-  //         `link[rel="icon"][sizes="${size}"]`
-  //       );
-  //       if (icon) {
-  //         let imageUrl = convertUrlToAbsolute(url, icon.getAttribute('href'));
-  //         images.push(imageUrl);
-  //         break;
-  //       }
-  //     }
-  //     // get apple touch icon
-  //     let appleIcon = xhr.responseXML.querySelector(
-  //       'link[rel="apple-touch-icon"]'
-  //     );
-  //     if (appleIcon) {
-  //       let imageUrl = convertUrlToAbsolute(
-  //         url,
-  //         appleIcon.getAttribute('href')
-  //       );
-  //       images.push(imageUrl);
-  //     }
-  //     // get large favicon
-  //     let favicon = new URL(url).origin + '/favicon.ico';
-  //     fetch(new Request(favicon)).then(
-  //       response => {
-  //         if (response.status === 200) {
-  //           let icon = new Image();
-  //           icon.onerror = function () {
-  //             resolve(images);
-  //           };
-  //           icon.onload = function () {
-  //             if (this.height >= 96) {
-  //               images.push(favicon);
-  //             }
-  //             resolve(images);
-  //           };
-  //           icon.src = favicon;
-  //         } else {
-  //           resolve(images);
-  //         }
-  //       },
-  //       reason => {
-  //         console.log(reason);
-  //       }
-  //     );
-  //   };
-  //   xhr.open('GET', url);
-  //   xhr.responseType = 'document';
-  //   xhr.send();
-  // });
+  return new Promise(function (resolve, reject) {
+    // tracking protection hack. use local resource instead
+    let whitelist = [
+      'mail.google.com',
+      'gmail.com',
+      'www.facebook.com',
+      'www.reddit.com',
+      'twitter.com',
+    ];
+    let hostname = new URL(url).hostname;
+    if (whitelist.includes(hostname)) {
+      resolve(['img/' + hostname + '.png']);
+      return;
+    }
+    let xhr = new XMLHttpRequest();
+    xhr.onerror = function (e) {
+      console.log(e);
+      resolve();
+    };
+    xhr.onload = function () {
+      let images = [];
+      // get open graph images
+      let metas = xhr.responseXML.getElementsByTagName('meta');
+      for (let meta of metas) {
+        if (
+          meta.getAttribute('property') === 'og:image' &&
+          meta.getAttribute('content')
+        ) {
+          let imageUrl = convertUrlToAbsolute(
+            url,
+            meta.getAttribute('content')
+          );
+          images.push(imageUrl);
+        }
+      }
+      // get large icons
+      let sizes = ['192x192', '180x180', '144x144', '96x96'];
+      for (let size of sizes) {
+        let icon = xhr.responseXML.querySelector(
+          `link[rel="icon"][sizes="${size}"]`
+        );
+        if (icon) {
+          let imageUrl = convertUrlToAbsolute(url, icon.getAttribute('href'));
+          images.push(imageUrl);
+          break;
+        }
+      }
+      // get apple touch icon
+      let appleIcon = xhr.responseXML.querySelector(
+        'link[rel="apple-touch-icon"]'
+      );
+      if (appleIcon) {
+        let imageUrl = convertUrlToAbsolute(
+          url,
+          appleIcon.getAttribute('href')
+        );
+        images.push(imageUrl);
+      }
+      // get large favicon
+      let favicon = new URL(url).origin + '/favicon.ico';
+      fetch(new Request(favicon)).then(
+        response => {
+          if (response.status === 200) {
+            let icon = new Image();
+            icon.onerror = function () {
+              resolve(images);
+            };
+            icon.onload = function () {
+              if (this.height >= 96) {
+                images.push(favicon);
+              }
+              resolve(images);
+            };
+            icon.src = favicon;
+          } else {
+            resolve(images);
+          }
+        },
+        reason => {
+          console.log(reason);
+        }
+      );
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'document';
+    xhr.send();
+  });
 }
 
 function saveThumbnails(url, images) {
-  // return new Promise(function (resolve, reject) {
-  //   let thumbnails = [];
-  //   browser.storage.local.get(url).then(result => {
-  //     if (result[url] && result[url].thumbnails) {
-  //       thumbnails = result[url].thumbnails;
-  //     }
-  //     if (images) {
-  //       thumbnails.push(images);
-  //     }
-  //     thumbnails = thumbnails.flat();
-  //     browser.storage.local
-  //       .set({ [url]: { thumbnails, thumbIndex: 0 } })
-  //       .then(() => resolve());
-  //   });
-  // });
+  return new Promise(function (resolve, reject) {
+    let thumbnails = [];
+    browser.storage.local.get(url).then(result => {
+      if (result[url] && result[url].thumbnails) {
+        thumbnails = result[url].thumbnails;
+      }
+      if (images) {
+        thumbnails.push(images);
+      }
+      thumbnails = thumbnails.flat();
+      browser.storage.local
+        .set({ [url]: { thumbnails, thumbIndex: 0 } })
+        .then(() => resolve());
+    });
+  });
 }
 
 // requires <all_urls> permission to capture image without a user gesture
 function getScreenshot(url) {
-  // return new Promise(function (resolve, reject) {
-  //   // capture from an existing tab if its open
-  //   browser.tabs
-  //     .query({ active: true, windowId: browser.windows.WINDOW_ID_CURRENT })
-  //     .then(tabs => browser.tabs.get(tabs[0].id))
-  //     .then(tab => {
-  //       if (tab.url === url) {
-  //         browser.tabs.captureVisibleTab().then(imageUri => {
-  //           resolve(imageUri);
-  //         });
-  //       } else {
-  //         // open tab, capture screenshot, and close
-  //         // todo: complete loaded status sometimes !== actually loaded
-  //         let tabID = null;
-  //         function handleUpdatedTab(tabId, changeInfo, tabInfo) {
-  //           if (tabId === tabID && changeInfo.status === 'complete') {
-  //             // workaround for chrome, which can only capture the active tab
-  //             if (!browser.runtime.getBrowserInfo) {
-  //               browser.tabs.update(tabID, { active: true }).then(tab => {
-  //                 setTimeout(function () {
-  //                   browser.tabs.captureVisibleTab().then(
-  //                     imageUri => {
-  //                       browser.tabs.onUpdated.removeListener(handleUpdatedTab);
-  //                       browser.tabs.remove(tabID);
-  //                       resolve(imageUri);
-  //                     },
-  //                     error => {
-  //                       console.log(error);
-  //                     }
-  //                   );
-  //                 }, 1000);
-  //               });
-  //             } else {
-  //               setTimeout(function () {
-  //                 browser.tabs.captureTab(tabID).then(imageUri => {
-  //                   browser.tabs.onUpdated.removeListener(handleUpdatedTab);
-  //                   browser.tabs.remove(tabID);
-  //                   resolve(imageUri);
-  //                 });
-  //               }, 1000);
-  //             }
-  //           }
-  //         }
-  //         browser.tabs.onUpdated.addListener(handleUpdatedTab);
-  //         browser.tabs.create({ url, active: false }).then(tab => {
-  //           tabID = tab.id;
-  //           // todo: tab can be hidden in ff. not currently supported in chrome
-  //           //browser.tabs.hide(tabID);
-  //         });
-  //       }
-  //     });
-  // });
+  return new Promise(function (resolve, reject) {
+    // capture from an existing tab if its open
+    browser.tabs
+      .query({ active: true, windowId: browser.windows.WINDOW_ID_CURRENT })
+      .then(tabs => browser.tabs.get(tabs[0].id))
+      .then(tab => {
+        if (tab.url === url) {
+          browser.tabs.captureVisibleTab().then(imageUri => {
+            resolve(imageUri);
+          });
+        } else {
+          // open tab, capture screenshot, and close
+          // todo: complete loaded status sometimes !== actually loaded
+          let tabID = null;
+          function handleUpdatedTab(tabId, changeInfo, tabInfo) {
+            if (tabId === tabID && changeInfo.status === 'complete') {
+              // workaround for chrome, which can only capture the active tab
+              if (!browser.runtime.getBrowserInfo) {
+                browser.tabs.update(tabID, { active: true }).then(tab => {
+                  setTimeout(function () {
+                    browser.tabs.captureVisibleTab().then(
+                      imageUri => {
+                        browser.tabs.onUpdated.removeListener(handleUpdatedTab);
+                        browser.tabs.remove(tabID);
+                        resolve(imageUri);
+                      },
+                      error => {
+                        console.log(error);
+                      }
+                    );
+                  }, 1000);
+                });
+              } else {
+                setTimeout(function () {
+                  browser.tabs.captureTab(tabID).then(imageUri => {
+                    browser.tabs.onUpdated.removeListener(handleUpdatedTab);
+                    browser.tabs.remove(tabID);
+                    resolve(imageUri);
+                  });
+                }, 1000);
+              }
+            }
+          }
+          browser.tabs.onUpdated.addListener(handleUpdatedTab);
+          browser.tabs.create({ url, active: false }).then(tab => {
+            tabID = tab.id;
+            // todo: tab can be hidden in ff. not currently supported in chrome
+            //browser.tabs.hide(tabID);
+          });
+        }
+      });
+  });
 }
 
 function getLogo(url) {
-  // return new Promise(function (resolve, reject) {
-  //   // todo: setting to enable/disable this?
-  //   let logoUrl =
-  //     'https://logo.clearbit.com/' + new URL(url).hostname + '?size=200';
-  //   fetch(new Request(logoUrl)).then(response => {
-  //     if (response.status === 200) {
-  //       resolve(logoUrl);
-  //     } else {
-  //       resolve([]);
-  //     }
-  //   });
-  // });
+  return new Promise(function (resolve, reject) {
+    // todo: setting to enable/disable this?
+    let logoUrl =
+      'https://logo.clearbit.com/' + new URL(url).hostname + '?size=200';
+    fetch(new Request(logoUrl)).then(response => {
+      if (response.status === 200) {
+        resolve(logoUrl);
+      } else {
+        resolve([]);
+      }
+    });
+  });
 }
 
 function resizeThumb(dataURI) {

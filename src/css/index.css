@@ -15,7 +15,7 @@ body {
 }
 
 body {
-  background: #222222;
+  background: transparent;
   background-size: cover;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
@@ -41,14 +41,37 @@ h1 {
 }
 
 .container {
-  display: flex;
-  flex-wrap: wrap;
-  /* align-items: center; */
-  /* align-content: safe center; */
-  /* justify-content: left; */
-  min-height: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  min-height: 30rem;
   opacity: 0;
-  margin: 0 20px;
+  justify-items: center;
+  align-items: center;
+  grid-gap: 10px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media (max-width: 950px) {
+  .container {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media (max-width: 750px) {
+  .container {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    grid-template-columns: auto;
+  }
 }
 
 #noBookmarks {
@@ -77,8 +100,8 @@ h1 {
 }
 
 .tile {
-  width: 230px;
-  height: 190px;
+  width: 190px;
+  height: 140px;
   border-radius: 7px;
   margin: 20px;
   opacity: 0.85;
@@ -104,7 +127,8 @@ h1 {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 10px;
+  padding: 20px;
+  border-radius: 30px;
 }
 
 .tile-title {
@@ -119,8 +143,8 @@ h1 {
 }
 
 .createDial {
-  width: 230px;
-  height: 190px;
+  width: 190px;
+  height: 140px;
   border-radius: 12px;
   margin: 20px;
   display: var(--create-dial-display);

@@ -669,26 +669,30 @@ function resizeThumb(dataURI) {
   return new Promise(function (resolve, reject) {
     let img = new Image();
     img.onload = function () {
-      if (this.height > 256 && this.width > 256) {
-        // when im less lazy check use optimal w/h based on image
-        // set height to 256 and scale
-        let height = 256;
-        let ratio = height / this.height;
-        let width = Math.round(this.width * ratio);
+      resolve(dataURI);
 
-        let canvas = document.createElement('canvas');
-        let ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = true;
+      // this was removing transparency
 
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(this, 0, 0, width, height);
+      // if (this.height > 256 && this.width > 256) {
+      //   // when im less lazy check use optimal w/h based on image
+      //   // set height to 256 and scale
+      //   let height = 256;
+      //   let ratio = height / this.height;
+      //   let width = Math.round(this.width * ratio);
 
-        const newDataURI = canvas.toDataURL('image/jpeg', 0.86);
-        resolve(newDataURI);
-      } else {
-        resolve(dataURI);
-      }
+      //   let canvas = document.createElement('canvas');
+      //   let ctx = canvas.getContext('2d');
+      //   ctx.imageSmoothingEnabled = true;
+
+      //   canvas.width = width;
+      //   canvas.height = height;
+      //   ctx.drawImage(this, 0, 0, width, height);
+
+      //   // const newDataURI = canvas.toDataURL('image/jpeg', 0.86);
+      //   resolve(dataURI);
+      // } else {
+      //   resolve(dataURI);
+      // }
     };
     img.src = dataURI;
   });
